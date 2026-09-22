@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#36536b"/></marker>
+    <style>
+      .stage{fill:#eef5fb;stroke:#1e5a85;stroke-width:3;rx:16}.reg{fill:#173b57;stroke:#173b57;rx:8}.title{font:700 25px Arial;fill:#102a3c}.label{font:700 20px Arial;fill:#173b57}.small{font:16px Arial;fill:#36536b}.rtext{font:700 15px Arial;fill:white}.line{stroke:#36536b;stroke-width:3;fill:none;marker-end:url(#arrow)}.feedback{stroke:#d06a32;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="520" fill="white"/>
+  <text x="600" y="42" text-anchor="middle" class="title">Five-Stage MIPS Pipeline</text>
+  <rect x="35" y="105" width="170" height="190" class="stage"/><text x="120" y="145" text-anchor="middle" class="label">IF</text><text x="120" y="182" text-anchor="middle" class="small">Program counter</text><text x="120" y="209" text-anchor="middle" class="small">Instruction fetch</text><text x="120" y="236" text-anchor="middle" class="small">PC + 4</text>
+  <rect x="225" y="92" width="42" height="216" class="reg"/><text x="246" y="205" text-anchor="middle" transform="rotate(-90 246 205)" class="rtext">IF / ID</text>
+  <rect x="287" y="105" width="170" height="190" class="stage"/><text x="372" y="145" text-anchor="middle" class="label">ID</text><text x="372" y="182" text-anchor="middle" class="small">Decode</text><text x="372" y="209" text-anchor="middle" class="small">Register read</text><text x="372" y="236" text-anchor="middle" class="small">Hazard detection</text>
+  <rect x="477" y="92" width="42" height="216" class="reg"/><text x="498" y="205" text-anchor="middle" transform="rotate(-90 498 205)" class="rtext">ID / EX</text>
+  <rect x="539" y="105" width="170" height="190" class="stage"/><text x="624" y="145" text-anchor="middle" class="label">EX</text><text x="624" y="182" text-anchor="middle" class="small">Forwarding muxes</text><text x="624" y="209" text-anchor="middle" class="small">ALU</text><text x="624" y="236" text-anchor="middle" class="small">Branch resolution</text>
+  <rect x="729" y="92" width="42" height="216" class="reg"/><text x="750" y="205" text-anchor="middle" transform="rotate(-90 750 205)" class="rtext">EX / MEM</text>
+  <rect x="791" y="105" width="170" height="190" class="stage"/><text x="876" y="145" text-anchor="middle" class="label">MEM</text><text x="876" y="182" text-anchor="middle" class="small">Data-memory read</text><text x="876" y="209" text-anchor="middle" class="small">Data-memory write</text>
+  <rect x="981" y="92" width="42" height="216" class="reg"/><text x="1002" y="205" text-anchor="middle" transform="rotate(-90 1002 205)" class="rtext">MEM / WB</text>
+  <rect x="1043" y="105" width="125" height="190" class="stage"/><text x="1105" y="145" text-anchor="middle" class="label">WB</text><text x="1105" y="182" text-anchor="middle" class="small">Result select</text><text x="1105" y="209" text-anchor="middle" class="small">Register write</text>
+  <path d="M205 200 H225 M267 200 H287 M457 200 H477 M519 200 H539 M709 200 H729 M771 200 H791 M961 200 H981 M1023 200 H1043" class="line"/>
+  <path d="M750 330 V385 H624 V295" class="feedback"/><text x="687" y="413" text-anchor="middle" class="small">EX/MEM forwarding</text>
+  <path d="M1105 295 V455 H590 V295" class="feedback"/><text x="850" y="482" text-anchor="middle" class="small">MEM/WB forwarding and WB-to-ID write-through</text>
+  <path d="M624 105 V70 H120 V105" class="feedback"/><text x="372" y="68" text-anchor="middle" class="small">Taken branch/jump redirect and flush</text>
+</svg>

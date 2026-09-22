@@ -1,0 +1,43 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+<SiteLayout title="aQuatonomous — Omar Allam" pageClass="legacy-project">
+<div class="container back-link"><a href="/#projects">← All projects</a></div>
+
+  <section class="hero">
+    <div class="container">
+      <h1>aQuatonomous — Autonomous Surface Vessel</h1>
+      <p class="lead">
+        A Level-3 autonomous catamaran built for the RoboNation RoboBoat competition.
+        Developed real-time navigation, control, and perception on a Jetson Orin Nano.
+      </p>
+      <div class="tags">
+        <span class="tag">ROS2</span><span class="tag">Jetson Orin Nano</span>
+        <span class="tag">EKF</span><span class="tag">PID Control</span><span class="tag">LiDAR Fusion</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid grid-2">
+      <img src="/assets/asv.png" alt="aQuatonomous ASV"/>
+      <div>
+        <h2>Overview</h2>
+        <p class="muted">
+          The vessel fuses LiDAR, IMU, and camera data for fully autonomous waypoint navigation.
+          I led the autonomy and electrical subsystems, designing control and telemetry architectures.
+        </p>
+        <h3>Key Contributions</h3>
+        <ul>
+          <li>Designed ROS2 node graph connecting perception → control → actuation.</li>
+          <li>Implemented EKF-based localization ( &lt; 1 m drift ).</li>
+          <li>Tuned PID controllers to hold heading within 2° during wave disturbances.</li>
+          <li>Managed 50 + member team and coordinated hardware–software integration.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+
+</SiteLayout>

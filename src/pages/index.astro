@@ -1,0 +1,63 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site } from '../config/site';
+const projects = [
+  { href: '/projects/frontenac/', image: '/assets/frontenac.jpg', title: 'Frontenac — Autonomy', category: 'Robotics · RoboBoat 2026', description: 'Mapping + planning contributions: DBSCAN entity mapping and potential-fields local planning for buoy-channel navigation.', containImage: true },
+  { href: '/projects/acdc/', image: '/assets/acdc.png', title: 'AC–DC Converter', category: 'Power electronics', description: 'MOSFET-based converter, 93 % efficiency, ± 0.3 V ripple, validated vs simulation.' },
+  { href: '/projects/humantracker/', image: '/assets/humantracker.jpg', title: 'Human Activity Recognition', category: 'Signal processing · ELEC 292', description: 'Trained logistic-regression model on smartphone accelerometer data (walking vs jumping) and built a Python GUI to visualize signals with 96 % accuracy.' },
+];
+---
+<SiteLayout>
+  <section class="hero container">
+    <div class="hero-copy">
+      <p class="eyebrow">Electrical Engineering · Queen’s University</p>
+      <h1>I build systems<br />close to the hardware<span class="accent">.</span></h1>
+      <p class="lead">CPU telemetry firmware at Qualcomm, autonomous systems at Queen’s, and RTL projects focused on computer architecture.</p>
+      <div class="hero-actions"><a class="button primary" href="#projects">Explore projects <span aria-hidden="true">↘</span></a><a class="text-link" href={site.resume} target="_blank" rel="noopener noreferrer">View resume ↗</a></div>
+      <p class="tech-line">C · Python · SystemVerilog · Zephyr RTOS · ROS2</p>
+    </div>
+    <aside class="hero-aside">
+      <img class="portrait" src="/assets/headshot.jpg" alt="Omar Allam" width="220" height="220" />
+      <div class="aside-caption"><span class="eyebrow">Currently</span><p>CPU telemetry firmware<br /><span>Qualcomm</span></p></div>
+    </aside>
+  </section>
+
+  <section id="projects" class="container section">
+    <div class="section-heading"><div><p class="eyebrow">01 / Selected work</p><h2>From RTL to real systems.</h2></div><span class="section-note">Architecture · Firmware · Autonomy</span></div>
+    <article class="featured-project">
+      <div class="featured-copy">
+        <p class="eyebrow">Featured project / Computer architecture</p>
+        <h3><a href="/projects/mips-pipeline/">Five-Stage Pipelined<br />MIPS Processor</a></h3>
+        <p>Synthesizable 32-bit MIPS-style CPU implementing IF, ID, EX, MEM, and WB stages with forwarding, load-use interlocking, branch recovery, and self-checking SystemVerilog verification.</p>
+        <p class="technology-list">SystemVerilog · Icarus Verilog · Verilator · Yosys · GTKWave · Computer Architecture · RTL Verification</p>
+        <a class="text-link" href="/projects/mips-pipeline/">Explore the processor <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="featured-visual">
+        <div class="diagram-heading"><span class="eyebrow">GTKWave / Verification trace</span><span class="status">Verified</span></div>
+        <a class="waveform-link" href="/projects/mips-pipeline/" aria-label="View the Five-Stage Pipelined MIPS Processor project">
+          <img class="waveform-image" src="/assets/mips-waveform.png" alt="GTKWave trace showing the MIPS processor clock, reset, program counter, flush, stall, forwarding, and write-back signals" width="2354" height="524" />
+        </a>
+        <div class="featured-results"><div><strong>55</strong><span>Simulated cycles</span></div><div><strong>20/20</strong><span>State checks passed</span></div></div>
+        <p class="test-result">ALL TESTS PASSED <span aria-hidden="true">↗</span></p>
+      </div>
+    </article>
+    <div class="project-grid">{projects.map(project => <ProjectCard {...project} />)}</div>
+  </section>
+
+  <section id="experience" class="container section">
+    <div class="section-heading"><div><p class="eyebrow">02 / Experience & education</p><h2>Engineering in practice.</h2></div></div>
+    <article class="experience featured-experience">
+      <div class="company"><img src="/qualcomm.png" alt="Qualcomm logo" width="64" height="64" loading="lazy" /><div><h3>Qualcomm</h3><span class="eyebrow">May 2026 — May 2027</span></div></div>
+      <div><h4>Data Center CPU — Telemetry Firmware Intern</h4><p>Developing C firmware on Zephyr RTOS for low-latency telemetry across 50+ processors. Work includes shared-memory communication, DMA, synchronization, cache invalidation and flushing, Python tooling, hardware validation, PMU/AMU profiling, and CPU performance investigations.</p></div>
+    </article>
+    <article class="experience"><div class="company"><h3>Aptera Motors</h3></div><div><h4><a href="/projects/aptera/">Engineering Intern ↗</a></h4><p>Embedded C and Python for EV telemetry and control. Hardware-in-the-loop testing and data automation.</p></div></article>
+    <article class="experience"><div class="company"><h3>Queen’s University</h3></div><div><h4>BASc Electrical Engineering</h4><p>Dean’s Scholar Standing. Focus in Control Systems, Computer Vision, Embedded Systems and Electronics.</p></div></article>
+  </section>
+
+  <section id="contact" class="container section contact">
+    <p class="eyebrow">03 / Contact</p><h2>Let’s talk engineering.</h2>
+    <p>Always happy to chat about robotics, autonomy, and space systems.</p>
+    <div class="contact-links"><a class="button primary" href={site.email}>Email me ↗</a><a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href={site.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href={site.resume} target="_blank" rel="noopener noreferrer">Resume ↗</a></div>
+  </section>
+</SiteLayout>

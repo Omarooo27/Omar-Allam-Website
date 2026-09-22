@@ -1,0 +1,12 @@
+---
+interface Props { href: string; image: string; title: string; description: string; category: string; containImage?: boolean; }
+const { href, image, title, description, category, containImage = false } = Astro.props;
+---
+<a class="project-card" href={href}>
+  <div class:list={['project-image', { 'contain-image': containImage }]}><img src={image} alt={title} loading="lazy" /></div>
+  <div class="project-copy">
+    <span class="eyebrow">{category}</span>
+    <h3>{title}<span aria-hidden="true">↗</span></h3>
+    <p>{description}</p>
+  </div>
+</a>

@@ -1,0 +1,47 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+<SiteLayout title="Human Activity Recognition — Omar Allam" pageClass="legacy-project">
+<div class="container back-link"><a href="/#projects">← All projects</a></div>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Human Activity Recognition — Smartphone Sensor Analytics</h1>
+      <p class="lead">
+        Team project for ELEC 292 (Instrumentation and Data Analysis).
+        Used smartphone accelerometer data to classify motion types and visualize telemetry signals.
+      </p>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">Machine Learning</span>
+        <span class="tag">Logistic Regression</span><span class="tag">GUI</span>
+        <span class="tag">Signal Processing</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid grid-2">
+      <!-- main project image -->
+      <img src="/assets/humantracker.jpg"
+           alt="Human Activity Recognition graph"
+           class="project-image" />
+      <div>
+        <h2>Overview</h2>
+        <p class="muted">
+          We collected smartphone accelerometer data using Phyphox and segmented 5 s windows
+          for walking vs jumping activities.
+          The data were filtered and feature-extracted per axis, normalized (z-score),
+          and stored in HDF5 for training.
+        </p>
+        <h3>Key Contributions</h3>
+        <ul>
+          <li>Applied moving-window filtering and extracted time-domain statistics (mean, RMS, variance).</li>
+          <li>Normalized each feature using z-score scaling and managed datasets in HDF5.</li>
+          <li>Trained logistic-regression model in Python achieving ≈96 % test accuracy.</li>
+          <li>Built a Tkinter GUI to visualize 3-axis accelerometer telemetry in real time.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</SiteLayout>

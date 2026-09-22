@@ -1,0 +1,65 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+<SiteLayout title="Aptera Motors — Omar Allam" pageClass="legacy-project">
+<div class="container back-link"><a href="/#projects">← All projects</a></div>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Aptera Motors — Engineering Intern</h1>
+      <p class="lead">
+        Practical embedded + data workflow contributions framed for real-time systems roles.
+      </p>
+      <div class="tags">
+        <span class="tag">Embedded</span><span class="tag">Linux</span>
+        <span class="tag">Python</span><span class="tag">Validation</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <img
+        src="/assets/aptera.jpg"
+        alt="Aptera Motors"
+        class="project-image-wide"
+      />
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Key Contributions (STAR)</h2>
+
+      <div class="star">
+        <h3>1) Signal Bring-up + Validation Workflow</h3>
+        <ul>
+          <li><strong>Situation:</strong> Early-stage vehicle development requires confirming that real signals (GPIO/PWM/analog) match what software expects.</li>
+          <li><strong>Task:</strong> Help verify embedded IO behavior and reduce ambiguity between “code says it should” and “hardware actually does”.</li>
+          <li><strong>Action:</strong> Used basic instrumentation and debugging workflow: validate timing and signal integrity, compare against expected behavior, log findings, and feed results back into iterative fixes. Focused on fundamentals: what changed, what’s measurable, what’s repeatable.</li>
+          <li><strong>Result:</strong> Faster turnaround during testing and clearer debug loops because issues were isolated as either firmware assumptions or physical signal behavior.</li>
+        </ul>
+
+      </div>
+
+      <div class="star">
+        <h3>2) Python Data Logging + Analysis for Debugging </h3>
+        <ul>
+          <li><strong>Situation:</strong> When a system is complex, the fastest progress comes from turning raw logs into actionable plots and checks.</li>
+          <li><strong>Task:</strong> Support debugging by creating repeatable data parsing + visualization so engineers can spot anomalies quickly.</li>
+          <li><strong>Action:</strong> Built lightweight Python scripts to parse logs, clean/normalize fields, compute simple metrics, and plot trends/anomalies. Emphasized repeatability: same input → same outputs → easier regression checks.</li>
+          <li><strong>Result:</strong> Debugging got more data-driven and consistent (less guessing), and issues could be triaged faster.</li>
+        </ul>
+
+      </div>
+
+      <h2>What I’m actively leveling up for real-time tooling roles</h2>
+      <ul>
+        <li>Real-time Linux basics: scheduling, latency/jitter awareness, profiling</li>
+        <li>Embedded peripherals: ADC/GPIO/PWM/SPI/I2C patterns + debugging</li>
+        <li>Reliable telemetry/data pipelines: logging formats, sanity checks, dashboards</li>
+      </ul>
+    </div>
+  </section>
+
+</SiteLayout>

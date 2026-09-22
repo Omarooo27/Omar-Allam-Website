@@ -1,0 +1,41 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Pipeline from '../../components/Pipeline.astro';
+import { site } from '../../config/site';
+const results = [
+  ['55', 'Simulated cycles'], ['18', 'Register checks passed'], ['2', 'Memory checks passed'],
+  ['20', 'Total architectural state checks'], ['1', 'Load-use stall'],
+  ['3', 'Control-flow redirects / pipeline flushes'], ['5', 'Cycles using operand forwarding'], ['0', 'Yosys structural problems'],
+];
+const instructions = [['Arithmetic', 'add, sub, addi'], ['Logical', 'and, or, xor, slt'], ['Memory', 'lw, sw'], ['Control flow', 'beq, bne, j'], ['Utility', 'nop']];
+---
+<SiteLayout title="Five-Stage Pipelined MIPS Processor — Omar Allam" description="A focused educational 32-bit MIPS-style CPU with forwarding, load-use interlocking, branch recovery, and self-checking SystemVerilog verification.">
+  <article class="container project-detail">
+    <a class="text-link" href="/#projects">← All projects</a>
+    <header class="project-header"><p class="eyebrow">Computer architecture / RTL verification</p><h1>Five-Stage Pipelined<br />MIPS Processor</h1><p class="lead">A synthesizable 32-bit CPU, from instruction fetch to write back. A focused educational MIPS-style subset, not a complete MIPS32 implementation.</p><p class="technology-list">SystemVerilog · Icarus Verilog · Verilator · Yosys · GTKWave · Computer Architecture · RTL Verification</p><a class="button primary" href={site.mipsRepository} target="_blank" rel="noopener noreferrer">View on GitHub ↗</a></header>
+
+    <figure class="waveform-figure">
+      <a href="/assets/mips-waveform.png" target="_blank" rel="noopener noreferrer">
+        <img src="/assets/mips-waveform.png" alt="GTKWave trace showing the MIPS processor clock, reset, program counter, flush, stall, forwarding, and write-back signals" width="2354" height="524" />
+      </a>
+      <figcaption>Self-checking simulation trace showing clock and reset, control-flow flushes, the load-use stall, forwarding activity, and write-back activity. Open for a full-size view.</figcaption>
+    </figure>
+
+    <section class="detail-section"><div class="section-heading"><div><p class="eyebrow">01 / Architecture</p><h2>Five stages. One datapath.</h2></div></div><Pipeline />
+      <div class="architecture-grid">
+        <div><h3>Datapath & storage</h3><p>A 32-bit datapath and 32-register register file, with register zero fixed at zero. Separate instruction and data memories avoid structural memory conflicts.</p><p>Four pipeline-register boundaries carry state between stages: IF/ID, ID/EX, EX/MEM, and MEM/WB.</p></div>
+        <div><h3>Data dependencies</h3><p>EX/MEM and MEM/WB forwarding supply both EX operands, including store data. WB-to-ID register-file write-through handles same-cycle reads and writes.</p><p>A one-cycle load-use stall holds fetch and decode while inserting a bubble into execution.</p></div>
+        <div><h3>Control flow</h3><p>Static predict-not-taken control flow keeps fetch moving sequentially. Branches and jumps are resolved in EX.</p><p>Taken redirects update the program counter and flush younger wrong-path instructions in IF and ID.</p></div>
+      </div>
+      <details class="architecture-source"><summary>View the original project architecture diagram <span aria-hidden="true">+</span></summary><figure><a href="/assets/mips-architecture.svg" target="_blank" rel="noopener noreferrer"><img src="/assets/mips-architecture.svg" alt="Original MIPS architecture diagram showing five stages, four pipeline-register boundaries, forwarding feedback, and branch redirect paths." width="1200" height="520" loading="lazy" /></a><figcaption>Original diagram from the CPU project. Open the image for a full-size view.</figcaption></figure></details>
+    </section>
+
+    <section class="detail-section"><p class="eyebrow">02 / Verification</p><h2>Checked against architectural state.</h2><p class="section-intro">Results recorded in the project’s September 21, 2026 verification run.</p><dl class="results-grid">{results.map(([value, label]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl><div class="verification-status"><span>Final simulation result</span><strong>ALL TESTS PASSED</strong></div>
+      <div class="verification-copy"><div><h3>How it was verified</h3><p>A self-checking SystemVerilog testbench executed directed instruction sequences and checked final register values, memory values, forwarding activity, load-use stalls, branch behavior, jumps, and suppression of wrong-path writes.</p><p>Yosys completed synthesis and its final structural check with zero problems. These results describe the directed test and structural checks; they are not a timing or area claim.</p></div><aside class="bug-note"><p class="eyebrow">Debugging the design</p><h3>Bug found during testing</h3><p>The first test exposed a same-cycle register-file dependency. A <code>sub</code> instruction read the old value of <code>r1</code> while WB wrote the new value during the same clock edge, producing 15 instead of 10.</p><p>WB-to-ID register-file write-through was added to both read ports, after which the complete test passed.</p></aside></div>
+    </section>
+
+    <section class="detail-section instruction-section"><div><p class="eyebrow">03 / Instruction set</p><h2>A focused subset.</h2><p>No exceptions, interrupts, delay slots, caches, multiplication/division, coprocessors, or virtual memory.</p></div><table><caption class="sr-only">Supported instruction subset</caption><thead><tr><th scope="col">Class</th><th scope="col">Instructions</th></tr></thead><tbody>{instructions.map(([type, list]) => <tr><th scope="row">{type}</th><td><code>{list}</code></td></tr>)}</tbody></table></section>
+
+    <section class="detail-section rtl-section"><div><p class="eyebrow">04 / Implementation</p><h2>Inside the RTL.</h2><p><code>mips_pipeline_cpu.sv</code> connects the pipeline, memories, and control flow. Dedicated modules implement the ALU, decoder, register file, forwarding, and hazard detection; <code>mips_pipeline_tb.sv</code> checks the complete processor.</p></div><a class="text-link" href={site.mipsRepository} target="_blank" rel="noopener noreferrer">Explore on GitHub ↗</a></section>
+  </article>
+</SiteLayout>

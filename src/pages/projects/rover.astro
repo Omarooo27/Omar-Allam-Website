@@ -1,0 +1,43 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+<SiteLayout title="Autonomous Rover — Omar Allam" pageClass="legacy-project">
+<div class="container back-link"><a href="/#projects">← All projects</a></div>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Autonomous Rover — Jetson ROS2 Platform</h1>
+      <p class="lead">
+        A personal project exploring real-time control and perception.
+        Built on a Jetson Nano using ROS2 with onboard cameras for obstacle detection.
+      </p>
+      <div class="tags">
+        <span class="tag">ROS2</span><span class="tag">Jetson</span>
+        <span class="tag">PID</span><span class="tag">OpenCV</span><span class="tag">PyTorch</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid grid-2">
+      <img src="/assets/rover.png" alt="Autonomous Rover"/>
+      <div>
+        <h2>Overview</h2>
+        <p class="muted">
+          Built a four-wheel rover integrating sensor data and control loops to track paths autonomously.
+          Implemented image-based obstacle avoidance and data visualization for debugging.
+        </p>
+        <h3>Key Work</h3>
+        <ul>
+          <li>Implemented PID control and trajectory planning ( 25 % faster loop response ).</li>
+          <li>Trained lightweight neural nets in PyTorch for obstacle classification.</li>
+          <li>Automated simulation tests and tuned gains through iterative field runs.</li>
+          <li>Developed live telemetry plots for stability and error analysis.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+
+</SiteLayout>

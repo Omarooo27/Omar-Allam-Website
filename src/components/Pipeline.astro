@@ -1,0 +1,24 @@
+---
+interface Props { compact?: boolean; }
+const { compact = false } = Astro.props;
+const stages = [
+  ['IF', 'Instruction fetch', 'PC + 4'],
+  ['ID', 'Instruction decode', 'Register read'],
+  ['EX', 'Execute', 'ALU · Branch resolution'],
+  ['MEM', 'Memory access', 'Load · Store'],
+  ['WB', 'Write back', 'Register write'],
+];
+---
+<div class:list={['pipeline', { compact }]}>
+  <ol aria-label="Five pipeline stages, from instruction fetch to write back">
+    {stages.map(([code, name, detail], index) => (
+      <li>
+        <span class="stage-number" aria-hidden="true">0{index + 1}</span>
+        <strong>{code}</strong>
+        <span class="stage-name">{name}</span>
+        {!compact && <span class="stage-detail">{detail}</span>}
+      </li>
+    ))}
+  </ol>
+  <div class="pipeline-caption"><span>32-bit datapath</span><span>5 stages / 4 register boundaries</span></div>
+</div>

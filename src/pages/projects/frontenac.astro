@@ -1,0 +1,72 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+<SiteLayout title="Frontenac (RoboBoat 2026) — Omar Allam" pageClass="legacy-project">
+<div class="container back-link"><a href="/#projects">← All projects</a></div>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Frontenac — Autonomous Surface Vessel</h1>
+      <p class="lead">
+        RoboBoat 2026 autonomy stack with mapping + planning designed for buoy-gated navigation and obstacle avoidance.
+        Focus: robust mapping in water environments and task-aware local planning.
+      </p>
+      <div class="tags">
+        <span class="tag">ROS2 Humble</span><span class="tag">Jetson Orin Nano</span>
+        <span class="tag">Mapping</span><span class="tag">Planning</span><span class="tag">LiDAR</span>
+      </div>
+      <div class="paper-link"><a class="button primary" href="/papers/aQuatonomous-2026-TheFrontenac.pdf" target="_blank" rel="noopener noreferrer">Read The Frontenac paper (PDF) ↗</a></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid grid-2">
+      <img class="frontenac-image" src="/assets/frontenac.jpg" alt="Frontenac ASV (RoboBoat 2026)" />
+      <div>
+        <h2>Overview</h2>
+        <p class="muted">
+          For RoboBoat tasks, we used a two-level autonomy approach: a task-aware global planner for state sequencing and waypoint generation,
+          and a local planner using potential fields (attractive forces to waypoints + repulsive forces from obstacles/buoys).
+          Mapping emphasized stable object tracking and robustness to water-surface noise and wave motion.
+        </p>
+
+        <div class="callout">
+          <strong>My focus:</strong> mapping pipeline design + local planning strategy (potential fields), tuned for buoy color constraints and real-world noise.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Key Contributions (STAR)</h2>
+
+      <div class="star">
+        <h3>1) DBSCAN + Entity List Mapping</h3>
+        <ul>
+          <li><strong>Situation:</strong> Needed robust real-time mapping in a water environment (noisy LiDAR, reflections, wave-induced vertical motion). SLAM/occupancy-grid approaches were heavy and unreliable for our constraints.</li>
+          <li><strong>Task:</strong> Build a mapping representation that is stable, debuggable, and directly useful for planning (buoy identities + positions over time).</li>
+          <li><strong>Action:</strong> Implemented a LiDAR mapping pipeline that removes water-surface artifacts, clusters obstacles using <strong>DBSCAN in (x,y) with z-invariance</strong>, validates cluster geometry, and converts to navigation-friendly polar coordinates (range/bearing). Added persistence via nearest-neighbour association + smoothing and gating to suppress false positives and survive brief occlusions.</li>
+          <li><strong>Result:</strong> Delivered stable object tracks appropriate for RoboBoat task logic while avoiding SLAM failure modes, improving on-water reliability and iteration speed.</li>
+        </ul>
+        <p class="muted small">
+          (Information found in The Frontenac report: RANSAC plane fitting → DBSCAN clustering with z-invariance → centroid validation → persistence tracking and RViz markers.)
+        </p>
+      </div>
+
+      <div class="star">
+        <h3>2) Planner Upgrade: A* → Potential Fields</h3>
+        <ul>
+          <li><strong>Situation:</strong> A* / discrete path planning was brittle under continuously updating detections and didn’t naturally encode buoy-color “channel” rules.</li>
+          <li><strong>Task:</strong> Create a planner that reacts smoothly to live buoy detections and uses buoy colors to guide motion through gates while still avoiding obstacles.</li>
+          <li><strong>Action:</strong> Switched to a <strong>behaviour-tree-gated potential-field local planner</strong>: attractive forces pull toward the current waypoint and repulsive forces push away from obstacles/buoys. The global planner generates waypoints centered between red/green gate buoys, and the local planner executes them with continuous obstacle avoidance.</li>
+          <li><strong>Result:</strong> More stable autonomous motion in real conditions (continuous, reactive, and aligned with competition rules) with simpler debugging than discrete replanning.</li>
+        </ul>
+        <p class="muted small">
+          (Found in the Frontenac report’s “two-level planning architecture” and “potential-field formulation” for waypoint following + obstacle avoidance.)
+        </p>
+      </div>
+    </div>
+  </section>
+
+</SiteLayout>

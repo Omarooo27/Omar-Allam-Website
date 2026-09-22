@@ -1,0 +1,43 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+<SiteLayout title="AC–DC Converter — Omar Allam" pageClass="legacy-project">
+<div class="container back-link"><a href="/#projects">← All projects</a></div>
+
+  <section class="hero">
+    <div class="container">
+      <h1>AC–DC Converter — High-Efficiency Power Design</h1>
+      <p class="lead">
+        Designed and tested a MOSFET-based isolated AC–DC converter producing
+        10 V @ 5 A with 93 % efficiency and ± 0.3 V ripple.
+      </p>
+      <div class="tags">
+        <span class="tag">Power Electronics</span>
+        <span class="tag">MOSFET</span>
+        <span class="tag">PCB Design</span>
+        <span class="tag">Simulation</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid grid-2">
+      <img src="/assets/acdc.png" alt="AC–DC Converter" class="project-image-wide acdc-image" />
+      <div>
+        <h2>Overview</h2>
+        <p class="muted">
+          A compact converter designed for robotics applications requiring stable low-voltage power.
+          Validated thermal, transient, and efficiency behavior through extended bench testing.
+        </p>
+        <h3>Highlights</h3>
+        <ul>
+          <li>Transformer-coupled isolation with active rectification.</li>
+          <li>93 % measured efficiency at nominal load.</li>
+          <li>30 + hours of load cycling and oscilloscope validation.</li>
+          <li>PCB manufactured and assembled in-house; verified thermal limits under load.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</SiteLayout>
